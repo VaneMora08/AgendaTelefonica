@@ -28,7 +28,12 @@ public class Agenda {
     }
 
     public boolean existeContacto(Contacto c) {
-        return contactos.contains(c);
+        for (Contacto contacto : contactos) {
+            if (contacto.getNombre().equals(c.getNombre())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void listarContactos() {
@@ -42,8 +47,16 @@ public class Agenda {
     }
 
     public void eliminarContacto(Contacto c) {
-        if (contactos.remove(c)) {
-            System.out.println("Contacto eliminado: " + c);
+        Contacto contactoAEliminar = null;
+        for (Contacto contacto : contactos) {
+            if (contacto.getNombre().equals(c.getNombre())) {
+                contactoAEliminar = contacto;
+                break;
+            }
+        }
+        if (contactoAEliminar != null) {
+            contactos.remove(contactoAEliminar);
+            System.out.println("Contacto eliminado: " + contactoAEliminar);
         } else {
             System.out.println("Contacto no encontrado.");
         }
